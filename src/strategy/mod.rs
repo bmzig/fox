@@ -3,24 +3,24 @@ use crate::dydx::{InternalAccount, Markets, Exposure};
 use crate::strategy::{
     market_make::MarketMake,
     second_derivative_trading::SecondDerivative,
-    reverse_retail::ReverseRetail,
-    structured_entropy::StructuredEntropy,
+    resistance::Resistance,
+    gradient_boosting::GradientBoosting,
     market_exposure::MarketExposure
 };
 
 mod market_make;
 mod second_derivative_trading;
-mod structured_entropy;
-mod reverse_retail;
+mod resistance;
+mod gradient_boosting;
 mod market_exposure;
 
 #[derive(Debug, PartialEq)]
 pub enum Strategy {
     MarketMake,
-    ReverseRetail,
     SecondDerivative,
-    StructuredEntropy,
+    Resistance,
     MarketExposure,
+    GradientBoosting,
 }
 
 impl Strategy {
@@ -36,12 +36,13 @@ impl Strategy {
             Strategy::MarketExposure => {
                 MarketExposure::run(account, exposure.unwrap(), testnet).await?
             }
-            Strategy::ReverseRetail => {
-                ReverseRetail::run(account, market, exposure.unwrap(), testnet).await?
+            Strategy::Resistance => {
+                Resistance::run(account, market, exposure.unwrap(), testnet).await?
             }
-            Strategy::StructuredEntropy => {
-                StructuredEntropy::run(account, market, exposure.unwrap(), testnet).await?
+            Strategy::GradientBoosting => {
+                GradientBoosting::run(account, market, exposure.unwrap(), testnet).await?
             }
+
         }
         Ok(())
     }

@@ -1,7 +1,7 @@
 mod rings;
 mod interpolation;
-mod gradient_descent;
 mod partitions;
+mod matrix;
 
 #[derive(Clone, Copy)]
 pub struct Trade {
@@ -28,6 +28,11 @@ pub struct Partition {
     volume: usize,
 }
 
+#[derive(Debug)]
+pub struct Matrix<const N: usize> {
+    t: [u64; N],
+    p: [f64; N],
+}
+
 pub struct Polynomial(Vec<f64>);
 pub struct Interpolation;
-pub struct StochasticGradientDescent;

@@ -167,5 +167,23 @@ impl InternalAccount {
         Ok(position_id)
     }
 
+    pub async fn current_orderbook(&self, market: Markets, testnet: bool) -> anyhow::Result<String> {
+    
+        let api_url = {
+            if testnet { format!("https://api.stage.dydx.exchange/v3/orderbook/{}", market) }
+            else { format!("https://api.dydx.exchange/v3/orderbook/{}", market) }
+        };
+        let url = url::Url::parse(&api_url).unwrap();
+
+        let client = Client::new();
+        let response = client.get(url)
+            .send()
+            .await?
+            .text()
+            .await?;
+
+        Ok(response)
+
+    }
 }
 

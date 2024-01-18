@@ -499,7 +499,7 @@ impl Markets {
 
     pub fn default_order_size(&self) -> f64 {
         match *self {
-            Markets::BTC => 0.001,
+            Markets::BTC => 0.0025,
             Markets::ETH => 0.01,
             Markets::SOL => 2.0,
             Markets::FIL => 5.0,

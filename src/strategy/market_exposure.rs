@@ -364,20 +364,14 @@ impl<const N: usize> ReceiveData<N> {
         let most_recent_average = self.partitions[(index - 1usize) % N].average();
         let oldest_average = self.partitions[(index - N) % N].average();
         let potential_drop = self.partitions[(index - (N-1)) % N].average();
-        if (most_recent_average - oldest_average).abs() < price_delta && (oldest_average - potential_drop) > dip_delta {
-            return true;
-        }
-        false
+        (most_recent_average - oldest_average).abs() < price_delta && (oldest_average - potential_drop) > dip_delta
     }
 
     fn soars(&self, index: usize, soar_delta: f64, price_delta: f64) -> bool {
         let most_recent_average = self.partitions[(index - 1usize) % N].average();
         let oldest_average = self.partitions[(index - N) % N].average();
         let potential_soar = self.partitions[(index - (N-1)) % N].average();
-        if (most_recent_average - oldest_average).abs() < price_delta && (potential_soar - oldest_average) > soar_delta {
-            return true;
-        }
-        false
+        (most_recent_average - oldest_average).abs() < price_delta && (potential_soar - oldest_average) > soar_delta
     }
 }
 

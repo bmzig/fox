@@ -55,17 +55,17 @@ async fn main() -> anyhow::Result<()> {
                     println!("{} {}", "[+]".green().bold(), "Using Strategy::MarketMake".green());
                     exposure = Some(Exposure::Low);
                 },
-                "se" => {
-                    bot_strategy = Strategy::StructuredEntropy;
-                    println!("{} {}", "[+]".green().bold(), "Using Strategy::StructuredEntropy".green());
+                "r" => {
+                    bot_strategy = Strategy::Resistance;
+                    println!("{} {}", "[+]".green().bold(), "Using Strategy::Resistance".green());
                 },
                 "sd" => {
                     bot_strategy = Strategy::SecondDerivative;
                     println!("{} {}", "[+]".green().bold(), "Using Strategy::SecondDerivative".green());
                 }
-                "gd" => {
-                    bot_strategy = Strategy::ReverseRetail;
-                    println!("{} {}", "[+]".green().bold(), "Using Strategy::ReverseRetail".green());
+                "gb" => {
+                    bot_strategy = Strategy::GradientBoosting;
+                    println!("{} {}", "[+]".green().bold(), "Using Strategy::GradientBoosting".green());
                 }
                 "me" => {
                     bot_strategy = Strategy::MarketExposure;
@@ -88,13 +88,7 @@ async fn main() -> anyhow::Result<()> {
         if bot_strategy != Strategy::MarketExposure { println!("{} {}", "[+]".yellow().bold(), "Initializing strategy. The bot takes ~10 minutes to gather data before it begins trading".yellow()); }
         else { println!("{} {}", "[+]".yellow().bold(), "Initializing strategy. The bot will need ~1 hour to gather data before it can trade".yellow()); }
         
-        bot_strategy.run(account_instance, Markets::ETH, exposure, testnet).await?;
-
-        /* // For debugging purposes
-        let position = apis::dydx::Position::new("1500".to_string(), "0.01".to_string(), apis::dydx::Side::BUY);
-        println!("{:?}", account_instance.open_order(dydx::Markets::ETH, position, apis::dydx::OrderType::LIMIT, "0.02".to_string(), "4".to_string(), 184552, false, None, None, None, false).await?);
-        println!("{:?}", account_instance.cancel_order("3b30d3b2e239aad7233500f60fc50e2b31a466bb07afdd2280919f837932263".to_string(), false).await?);
-        */
+        bot_strategy.run(account_instance, Markets::BTC, exposure, testnet).await?;
     }
 
     Ok(())
