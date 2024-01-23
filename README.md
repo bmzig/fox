@@ -7,7 +7,7 @@
 
 ### Installation
 
-Welcome to my crypto speculation bot.
+Welcome to a crypto speculation bot.
 You must have Rust installed.
 You must also have your DYDX API key, passphrase, secret, STARK private key, and Ethereum address in your .env file or as an environment variable.
 
@@ -18,4 +18,4 @@ You must also have your DYDX API key, passphrase, secret, STARK private key, and
 
 This is a work in progress. There are a lot of values hard-coded in that will need to be changed by the user.
 
-Yes, the name is basically the same as the python Bitcoin trading bot [gekko](https://github.com/askmike/gekko). The name was too good to pass up.
+**This is just for testing. In most English speaking countries, you can't actually use it for trading because of regulations**
